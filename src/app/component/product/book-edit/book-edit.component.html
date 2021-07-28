@@ -1,17 +1,33 @@
-<h1>Edit Product</h1>
+<h1>Edit Book</h1>
 <form [formGroup]="bookEditForm" (ngSubmit)="updateBook(id)">
-  <table>
+  <table cellpadding="10">
     <tr>
       <th>Title: </th>
-      <td><input type="text" formControlName="title"></td>
+      <td>
+        <input type="text" formControlName="title">
+        <div class='form-error' *ngIf="(title.touched) || isSubmitted">
+          <p *ngIf="title.errors?.required">Required</p>
+          <p *ngIf="title.errors?.minlength">Should have at least 3 characters</p>
+        </div>
+      </td>
     </tr>
     <tr>
       <th>Author: </th>
-      <td><input type="text" formControlName="author"></td>
+      <td>
+        <input type="text" formControlName="author">
+        <div class='form-error' *ngIf="(author.touched) || isSubmitted">
+          <p *ngIf="author.errors?.required">Required</p>
+        </div>
+      </td>
     </tr>
     <tr>
       <th>Description: </th>
-      <td><textarea rows="10" cols="20" formControlName="description"></textarea></td>
+      <td>
+        <textarea rows="10" cols="20" formControlName="description"></textarea>
+        <div class='form-error' *ngIf="(description.touched) || isSubmitted">
+          <p *ngIf="description.errors?.required">Required</p>
+        </div>
+      </td>
     </tr>
     <tr>
       <td><a routerLink="/books"><button class="cancel" type="button">Cancel</button></a></td>

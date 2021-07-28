@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BookService} from '../../../service/book/book.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
@@ -38,24 +38,40 @@ export class BookEditComponent implements OnInit {
       book => {
         this.bookEditForm = this.fb.group({
           id: [book.id],
-          title: [book.title],
-          author: [book.author],
-          description: [book.description],
+          title: [book.title, [Validators.required, Validators.minLength(3)]],
+          author: [book.author, [Validators.required]],
+          description: [book.description, [Validators.required]],
         });
       }
     );
   }
 
   updateBook(id: number) {
-    const book = this.bookEditForm.value;
-    this.bookService.updateBook(id, book).subscribe(
-      () => {
-        alert('Updated book');
-        this.router.navigateByUrl('/books');
-      },
-      e => {
-        console.log(e);
-      }
-    );
+    this.isSubmitted = true;
+    if (this.bookEditForm.valid) {
+      const book = this.bookEditForm.value;
+      this.bookService.updateBook(id, book).subscribe(
+        () => {
+          alert('Updated book');
+          this.isSubmitted = false;
+          this.router.navigateByUrl('/books');
+        },
+        e => {
+          console.log(e);
+        }
+      );
+    }
+  }
+
+  get title() {
+    return this.bookEditForm.get('title');
+  }
+
+  get author() {
+    return this.bookEditForm.get('author');
+  }
+
+  get description() {
+    return this.bookEditForm.get('description');
   }
 }

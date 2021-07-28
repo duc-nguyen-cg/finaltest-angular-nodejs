@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 .form-error p{
   color: red;
-  font-weight: 500;
+  font-weight: 600;
 }
 .add {
   background-color: lawngreen;
@@ -20,4 +20,13 @@ button {
   height: 30px;
   border: none;
   cursor: pointer;
+  margin-left: 15%;
+  margin-right: 15%;
 }
+th {
+  vertical-align: top;
+}
+input {
+  width: 200px;
+}
+

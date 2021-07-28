@@ -1,6 +1,13 @@
 <h1>Book List</h1>
-<a routerLink="/books/create"><button type="button" class="add">Add Book</button></a>
 <table cellpadding="10">
+  <tr>
+    <td colspan="3">
+      There are {{books.length}} book(s)
+    </td>
+    <td colspan="2" style="text-align: center">
+      <a routerLink="/books/create"><button type="button" class="add">Add Book</button></a>
+    </td>
+  </tr>
   <tr>
     <th>#</th>
     <th>Title</th>

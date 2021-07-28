@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BookService} from '../../../service/book/book.service';
 import {Router} from '@angular/router';
 
@@ -10,19 +10,23 @@ import {Router} from '@angular/router';
 })
 export class BookCreateComponent implements OnInit {
   isSubmitted = false;
-  bookCreateForm: FormGroup;
+  bookCreateForm: FormGroup = new FormGroup({
+    title: new FormControl(),
+    author: new FormControl(),
+    description: new FormControl()
+  });
 
   constructor(private fb: FormBuilder,
               private bookService: BookService,
               private router: Router) {
-  }
-
-  ngOnInit() {
     this.bookCreateForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       author: ['', [Validators.required]],
       description: ['', [Validators.required]]
     });
+  }
+
+  ngOnInit() {
   }
 
   submit() {
@@ -31,8 +35,8 @@ export class BookCreateComponent implements OnInit {
       const book = this.bookCreateForm.value;
       this.bookService.saveBook(book).subscribe(
         () => {
-          this.bookCreateForm.reset();
           this.isSubmitted = false;
+          this.bookCreateForm.reset();
           alert('Added new book!');
           this.router.navigateByUrl('/books');
         }, e => {

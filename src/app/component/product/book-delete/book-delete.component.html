@@ -1,0 +1,21 @@
+<h1>Delete Book</h1>
+<form [formGroup]="bookDeleteForm" (ngSubmit)="deleteBook(id)">
+  <table cellpadding="10">
+    <tr>
+      <th>Title: </th>
+      <td>{{deletedBook.title}}</td>
+    </tr>
+    <tr>
+      <th>Author: </th>
+      <td>{{deletedBook.author}}</td>
+    </tr>
+    <tr>
+      <th>Description: </th>
+      <td>{{deletedBook.description}}</td>
+    </tr>
+    <tr>
+      <td><a routerLink="/books"><button class="cancel" type="button">Cancel</button></a></td>
+      <td><button class="delete">Delete</button></td>
+    </tr>
+  </table>
+</form>

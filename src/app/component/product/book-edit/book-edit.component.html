@@ -1,0 +1,21 @@
+<h1>Edit Product</h1>
+<form [formGroup]="bookEditForm" (ngSubmit)="updateBook(id)">
+  <table>
+    <tr>
+      <th>Title: </th>
+      <td><input type="text" formControlName="title"></td>
+    </tr>
+    <tr>
+      <th>Author: </th>
+      <td><input type="text" formControlName="author"></td>
+    </tr>
+    <tr>
+      <th>Description: </th>
+      <td><textarea rows="10" cols="20" formControlName="description"></textarea></td>
+    </tr>
+    <tr>
+      <td><a routerLink="/books"><button class="cancel" type="button">Cancel</button></a></td>
+      <td><button class="edit">Save changes</button></td>
+    </tr>
+  </table>
+</form>
